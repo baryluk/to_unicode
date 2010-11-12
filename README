@@ -1,0 +1,37 @@
+to_unicode - Convert any character set into unicode and UTF-8 using pure Erlang
+
+
+Main function:
+
+  to_unicode:to_unicode(Input, CharsetAtom) -> OutputUnicode
+
+  - Input is IoList (or should be)
+  - OutputUnicode is unicode (not UTF-8!)
+  - CharsetAtom is atom representing charset.
+
+Helper function:
+
+  to_unicode:find_encoding(string()) > atom(),
+
+  If you have string representing charset, then use
+  this function to convert for example
+  "iso8859-1", "latin2", "ISO-8859-2" into atom 'iso-8859-2',
+  which can be used in to_unicode:to_unicode/2 function.
+  It is case insensitive.
+
+Other functions:
+
+  to_unicode:encode_to_utf8(Input, Charset) -> OutputUTF8
+
+  Charset can be atom or string.
+  OutputUTF8 is in UTF-8 encoding.
+
+
+There is no plans to support any conversion other than to Unicode.
+Currently all ISO-8859-* standards are supported. There are
+plans to add support to BIG5 and SHIFTJIS, but it is not yet working.
+It is not going to have all features of iconv library.
+I want to keep it as simple as possible and keep it pure Erlang.
+
+Files in generated_tables/ was generated using gen.sh script,
+from tables from unicode.org (gen.sh downloads them).
